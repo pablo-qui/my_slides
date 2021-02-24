@@ -1,0 +1,72 @@
+r_present
+========================================================
+author: 
+date: 
+autosize: true
+font-import : http://fonts.googleapis.com/css?family=Caveat
+font-family: "Caveat"
+css: spec.css
+
+First Slide
+========================================================
+type: exclaim
+transition: fade
+transition-speed: slow
+incremental: true
+For more details on authoring R presentations please visit <https://support.rstudio.com/hc/en-us/articles/200486468>.
+
+- Bullet 1
+<li class="fragment fade-in"> hello </li>
+- Bullet 2
+- Bullet 3
+```{r}
+summary(cars)
+```
+
+Slide With Code
+========================================================
+ first column 
+```{r}
+1:10
+```
+***
+second column
+```{r}
+(1:10)^2
+```
+
+
+Slide With Plot
+========================================================
+
+$$\sin(\frac{3\pi}{2})=-1 $$
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
+
+Slide With Plotly
+========================================================
+```{r,include=F}
+library(plotly)
+
+x <- c(1:20)
+y <- x*x
+data <- data.frame(x,y)
+p <- plot_ly(data,x=~x,y=~y,name='cuadratic',type='scatter')
+htmlwidgets::saveWidget(p,'plotly.html')
+
+```
+
+<style>
+  .p_iframe iframe {
+    width:70%;
+    height:576px;
+}
+</style>
+
+<div class="p_iframe">
+<iframe frameborder="0" seamless='seamless' scrolling=no src="plotly.html"></iframe>
+</div>
+
