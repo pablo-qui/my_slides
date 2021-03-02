@@ -1,53 +1,70 @@
-r_present
+Blood Dataset
 ========================================================
-author: 
+author: Pablo Quicios Asenjo
 date: 
 autosize: true
-font-import : http://fonts.googleapis.com/css?family=Caveat
-font-family: "Caveat"
+font-import : http://fonts.googleapis.com/css?family=Helvetica
+font-family: "Helvetica"
 css: spec.css
 
-First Slide
+```{r,include=F}
+library(Stat2Data)
+data(Blood1)
+library(ggplot2)
+color_2 <- "seagreen2"
+color_3 <- "orange2"
+
+Blood1$Smoke <- as.factor(Blood1$Smoke)
+Blood1$Overwt <- as.factor(Blood1$Overwt)
+```
+
+
+Brief Description
 ========================================================
 type: exclaim
 transition: fade
 transition-speed: slow
 incremental: true
-For more details on authoring R presentations please visit <https://support.rstudio.com/hc/en-us/articles/200486468>.
 
-- Bullet 1
-<li class="fragment fade-in"> hello </li>
-- Bullet 2
-- Bullet 3
-```{r}
-summary(cars)
-```
 
-Slide With Code
+This dataset contains information of the systolic blood pressure, weight and smoking status for a sample of 500 adults. The variables are explained now.
+- SystolicBP: systolic blood pressure (mm of Hg)
+- Smoke: 1=smoker or 0=non-smoker
+- Overwt: 1=normal, 2=overweight or 3=obese.
+
+The aim of the study is to determine the corretaion of the two latter variables with the first one.
+
+Systolic blood pressure and Smoke
 ========================================================
- first column 
+type: exclaim
+transition: fade
+transition-speed: slow
+incremental: true
+
+We first check how smoking affects the systolic blood pressure.
 ```{r}
-1:10
-```
-***
-second column
-```{r}
-(1:10)^2
+ggplot(Blood1, aes(x=SystolicBP,color=Smoke,fill=Smoke)) + geom_density(alpha = 0.4) +  scale_color_manual(values = c("darkgreen", "darkorange3")) +
+  scale_fill_manual(values = c(color_2, color_3))
 ```
 
 
 Slide With Plot
 ========================================================
+type: exclaim
+transition: fade
+transition-speed: slow
+incremental: true
 
-$$\sin(\frac{3\pi}{2})=-1 $$
-
-```{r, echo=FALSE}
-plot(cars)
+```{r}
+ggplot(Blood1, aes(x=SystolicBP,color=Overwt,)) + geom_density(alpha = 0.4) 
 ```
-
 
 Slide With Plotly
 ========================================================
+type: exclaim
+transition: fade
+transition-speed: slow
+incremental: true
 ```{r,include=F}
 library(plotly)
 
