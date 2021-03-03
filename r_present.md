@@ -1,72 +1,56 @@
-r_present
+Blood Dataset
 ========================================================
-author: 
+author: Pablo Quicios Asenjo
 date: 
 autosize: true
-font-import : http://fonts.googleapis.com/css?family=Caveat
-font-family: "Caveat"
+font-import : http://fonts.googleapis.com/css?family=Helvetica
+font-family: "Helvetica"
 css: spec.css
 
-First Slide
+
+
+
+Brief Description
 ========================================================
 type: exclaim
 transition: fade
 transition-speed: slow
 incremental: true
-For more details on authoring R presentations please visit <https://support.rstudio.com/hc/en-us/articles/200486468>.
 
-- Bullet 1
-<li class="fragment fade-in"> hello </li>
-- Bullet 2
-- Bullet 3
 
-```r
-summary(cars)
-```
+This dataset contains information of the systolic blood pressure, weight and smoking status for a sample of 500 adults. The variables are explained now.
+- SystolicBP: systolic blood pressure (mm of Hg)
+- Smoke: 1=smoker or 0=non-smoker
+- Overwt: 1=normal, 2=overweight or 3=obese.
 
-```
-     speed           dist       
- Min.   : 4.0   Min.   :  2.00  
- 1st Qu.:12.0   1st Qu.: 26.00  
- Median :15.0   Median : 36.00  
- Mean   :15.4   Mean   : 42.98  
- 3rd Qu.:19.0   3rd Qu.: 56.00  
- Max.   :25.0   Max.   :120.00  
-```
+The aim of the study is to determine the correlation of the two latter variables with the first one.
 
-Slide With Code
+Systolic blood pressure and Smoke
 ========================================================
- first column 
+type: exclaim
+transition: fade
+transition-speed: slow
+incremental: true
 
-```r
-1:10
-```
+We first check if smoking and being overweight affects significantly the systolic blood pressure.
 
-```
- [1]  1  2  3  4  5  6  7  8  9 10
-```
-***
-second column
-
-```r
-(1:10)^2
-```
-
-```
- [1]   1   4   9  16  25  36  49  64  81 100
-```
-
+<img src="r_present-figure/figures-side-1.png" title="plot of chunk figures-side" alt="plot of chunk figures-side" width="50%" /><img src="r_present-figure/figures-side-2.png" title="plot of chunk figures-side" alt="plot of chunk figures-side" width="50%" />
 
 Slide With Plot
 ========================================================
+type: exclaim
+transition: fade
+transition-speed: slow
+incremental: true
 
-$$\sin(\frac{3\pi}{2})=-1 $$
-
-![plot of chunk unnamed-chunk-4](r_present-figure/unnamed-chunk-4-1.png)
 
 
 Slide With Plotly
 ========================================================
+type: exclaim
+transition: fade
+transition-speed: slow
+incremental: true
 
 
 <style>

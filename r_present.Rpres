@@ -32,7 +32,7 @@ This dataset contains information of the systolic blood pressure, weight and smo
 - Smoke: 1=smoker or 0=non-smoker
 - Overwt: 1=normal, 2=overweight or 3=obese.
 
-The aim of the study is to determine the corretaion of the two latter variables with the first one.
+The aim of the study is to determine the correlation of the two latter variables with the first one.
 
 Systolic blood pressure and Smoke
 ========================================================
@@ -41,12 +41,14 @@ transition: fade
 transition-speed: slow
 incremental: true
 
-We first check how smoking affects the systolic blood pressure.
-```{r}
-ggplot(Blood1, aes(x=SystolicBP,color=Smoke,fill=Smoke)) + geom_density(alpha = 0.4) +  scale_color_manual(values = c("darkgreen", "darkorange3")) +
-  scale_fill_manual(values = c(color_2, color_3))
-```
+We first check if smoking and being overweight affects significantly the systolic blood pressure.
 
+```{r,echo=F,figures-side, fig.show="hold", out.width="50%"}
+par(mfrow=c(1,2))
+ggplot(Blood1, aes(x=SystolicBP,color=Smoke)) + geom_density(alpha = 0.4) 
+
+ggplot(Blood1, aes(x=SystolicBP,color=Overwt,)) + geom_density(alpha = 0.4) 
+```
 
 Slide With Plot
 ========================================================
@@ -55,9 +57,7 @@ transition: fade
 transition-speed: slow
 incremental: true
 
-```{r}
-ggplot(Blood1, aes(x=SystolicBP,color=Overwt,)) + geom_density(alpha = 0.4) 
-```
+
 
 Slide With Plotly
 ========================================================
