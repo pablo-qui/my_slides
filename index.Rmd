@@ -1,0 +1,183 @@
+---
+title: "Blood Dataset <p style='text-transform: none;'><small>Pablo Quicios Asenjo</small></p>"
+
+output:
+  revealjs::revealjs_presentation:
+    theme: sky
+    highlight: pygments
+    center: true
+    increment: true
+    self_contained: false   
+---
+
+
+## Brief Description {incremental=true}
+<style>
+  .p_iframe iframe {
+    width:70%;
+    height:476px;
+    
+}
+.p_iframe2 iframe {
+    width:80%;
+    height:476px;
+    
+}
+  
+  
+</style>
+```{r,include=F}
+library(Stat2Data)
+data(Blood1)
+library(ggplot2)
+color_2 <- "seagreen2"
+color_3 <- "orange2"
+
+Blood1$Smoke <- as.factor(Blood1$Smoke)
+Blood1$Overwt <- as.factor(Blood1$Overwt)
+```
+
+This dataset contains information of the systolic blood pressure, weight and smoking status for a sample of 500 adults. The variables are explained now.
+<br>
+
+<li class='fragment fade-in'> SystolicBP: systolic blood pressure (mm of Hg),</li>
+<li class='fragment fade-in'> Smoke: 1=smoker or 0=non-smoker,
+<li class='fragment fade-in'> Overwt: 1=normal, 2=overweight or 3=obese.</li>
+<br>
+<p class='fragment fade-in'>
+
+
+The aim of the study is to determine the correlation of the two latter variables with the first one.</p>
+
+
+# Densities in different populations  {incremental=true}
+We ask ourselves if the systolic pressure is signifacntly different between smokers and non-smokers and among weight classes. 
+<br>
+<p class='fragment fade-in'>
+We will plot the density of the systolic pressure regarding each population.
+</p>
+
+## Effect of Smoking {data-transition="zoom"  incremental=true}
+
+
+```{r,echo=FALSE,out.height='400px'}
+ggplot(Blood1, aes(x=SystolicBP,color=Smoke)) + geom_density(alpha = 0.4) 
+```
+<p class='fragment fade-in'>
+We don't observe significant difference between the classes. </p>
+
+
+## Effect of Weight {data-transition="zoom" }
+
+```{r,echo=FALSE,out.height='400px'}
+ggplot(Blood1, aes(x=SystolicBP,color=Overwt)) + geom_density(alpha = 0.4) 
+```
+
+<p class='fragment fade-in'>Again, no highly significant differences are seen. </p>
+
+# High Systolic Pressure  
+
+<p class='fragment fade-in'>Normally, having a systolic pressure of 140mmHg or higher is considered unhealthy or dangerous.
+</p>
+<p class='fragment fade-in'> We will now check, among the people in the sample with high pressure, the percentage that belongs to each smoking or weight class. </p>
+
+
+## High Pressure and Smoking
+```{r,include=F}
+library(plotly)
+library(tidyverse)
+library(knitr)
+danger <- Blood1[Blood1$SystolicBP>140,]
+smoker <- sum(danger$Smoke==1)
+non_smoker <- sum(danger$Smoke==0)
+
+
+risk_smoke <- data.frame("Smoke"=c("Non Smoker","Smoker"),"Number"=c(non_smoker,smoker))
+
+fig <- plot_ly(risk_smoke, labels = ~Smoke, values = ~Number, type = 'pie')
+
+htmlwidgets::saveWidget(fig,'fig.html')
+
+```
+<div class="p_iframe">
+<iframe frameborder="0" seamless='seamless' scrolling=no src="fig.html"></iframe>
+</div>
+<p class='fragment fade-in'> As expected, smokers represent more than half of the population with high systolic pressure</p> 
+
+## High Pressure and Weight
+
+```{r,echo=F}
+
+normal <- sum(danger$Overwt==0)
+overwt <- sum(danger$Overwt==1)
+obese <- sum(danger$Overwt==2)
+
+risk_weight <- data.frame("Weight"=c("Normal","Overweight","Obese"),"Number"=c(normal,overwt,obese))
+
+fig2 <- plot_ly(risk_weight, labels = ~Weight, values = ~Number, type = 'pie')
+
+htmlwidgets::saveWidget(fig2,'fig2.html')
+```
+
+<div class="p_iframe">
+<iframe frameborder="0" seamless='seamless' scrolling=no src="fig2.html"></iframe>
+</div>
+<p class='fragment fade-in'> We see how obese people represent almost half of the population with high systolic pressure</p> 
+# High Systolic Pressure II
+<p class='fragment fade-in'> 
+We have seen the percentage of people with high systolic pressure that represents each classes , but we haven't seen the percentage of people of each class with high pressure.</p>
+
+<p class='fragment fade-in'> This would be more interesting to try to detect possible higher risks between classes. </p>
+
+## jjj
+```{r,echo=F}
+smoker <- Blood1[Blood1$Smoke==1,]
+nsmoker <- Blood1[Blood1$Smoke==0,]
+
+
+per_high_nsmo <- sum(nsmoker$SystolicBP>140)/nrow(nsmoker)
+per_high_smo <- sum(smoker$SystolicBP>140)/nrow(smoker)
+
+smo <- c("Non Smoker","Smoker")
+
+Percentage_high_pressure <- c(per_high_nsmo,per_high_smo)
+Percentage_normal <- c(1-c(per_high_nsmo,per_high_smo))
+per_weight <- data.frame(smo, Percentage_high_pressure)
+
+fig4 <- plot_ly(per_weight, x = ~smo, y = ~Percentage_high_pressure, type = 'bar', name = 'SF Zoo')
+fig4 <- fig4 %>% add_trace(y = ~Percentage_normal, name = 'LA Zoo')
+fig4 <- fig4 %>% layout(yaxis = list(title = 'Count'), barmode = 'stack')
+htmlwidgets::saveWidget(fig4,'fig4.html')
+
+```
+<div class="p_iframe2">
+<iframe frameborder="0" seamless='seamless' scrolling=no src="fig4.html"></iframe>
+</div>
+## ki
+
+```{r,echo=F}
+normal <- Blood1[Blood1$Overwt==0,]
+overwt <- Blood1[Blood1$Overwt==1,]
+obese <- Blood1[Blood1$Overwt==2,]
+
+per_high_normal <- sum(normal$SystolicBP>140)/nrow(normal)
+per_high_overwt <- sum(overwt$SystolicBP>140)/nrow(overwt)
+per_high_obese <- sum(obese$SystolicBP>140)/nrow(obese)
+Weights <- c("Normal","Overweight","Obese")
+
+Percentage_high_pressure <- c(per_high_normal,per_high_overwt,per_high_obese)
+Percentage_normal <- c(1-c(per_high_normal,per_high_overwt,per_high_obese))
+per_weight <- data.frame(Weights, Percentage_high_pressure)
+
+fig3 <- plot_ly(per_weight, x = ~Weights, y = ~Percentage_high_pressure, type = 'bar', name = 'SF Zoo')
+fig3 <- fig3 %>% add_trace(y = ~Percentage_normal, name = 'LA Zoo')
+fig3 <- fig3 %>% layout(yaxis = list(title = 'Count'), barmode = 'stack')
+htmlwidgets::saveWidget(fig3,'fig3.html')
+
+```
+<div class="p_iframe2">
+<iframe frameborder="0" seamless='seamless' scrolling=no src="fig3.html"></iframe>
+</div>
+
+
+
