@@ -11,7 +11,7 @@
 
 
 
-<link rel="stylesheet" href="index_files/reveal.js-3.3.0.1/css/theme/sky.css" id="theme">
+<link rel="stylesheet" href="index_files/reveal.js-3.3.0.1/css/theme/white.css" id="theme">
 
 
   <!-- some tweaks to reveal css -->
@@ -460,23 +460,29 @@ document.getElementsByTagName('head')[0].appendChild(style);
   .p_iframe iframe {
     width:70%;
     height:476px;
-    
+    margin-right:0cm
 }
-.p_iframe2   iframe {
-    width:80%;
+
+   .p_iframe4 iframe {
+    width:70%;
     height:476px;
-    
-}
-  
+    margin-right:0cm
+} 
+
+   .p_iframe2 iframe {
+    width:70%;
+    height:476px;
+    margin-right:0cm
+} 
   
 </style>
 <p>This dataset contains information of the systolic blood pressure, weight and smoking status for a sample of 500 adults. The variables are explained now. <br></p>
-<li class="fragment fade-in">
+<li class="fragment fade-right">
 SystolicBP: systolic blood pressure (mm of Hg),
 </li>
-<li class='fragment fade-in'>
+<li class='fragment fade-right'>
 Smoke: 1=smoker or 0=non-smoker,
-<li class="fragment fade-in">
+<li class="fragment fade-right">
 Overwt: 1=normal, 2=overweight or 3=obese.
 </li>
 <br>
@@ -484,7 +490,10 @@ Overwt: 1=normal, 2=overweight or 3=obese.
 The aim of the study is to determine the correlation of the two latter variables with the first one.
 </p>
 </section>
-<section><section id="densities-in-different-populations" class="title-slide slide level1" data-incremental="true"><h1>Densities in different populations</h1>We ask ourselves if the systolic pressure is signifacntly different between smokers and non-smokers and among weight classes. <br>
+<section><section id="densities-in-different-populations" class="title-slide slide level1" data-incremental="true"><h1>Densities in different populations</h1><p class="fragment fade-in">
+We ask ourselves if the systolic pressure is signicantly different between smokers and non-smokers and among weight classes.
+</p>
+<br>
 <p class="fragment fade-in">
 We will plot the density of the systolic pressure regarding each population.
 </p></section><section id="effect-of-smoking" class="slide level2" data-transition="zoom" data-incremental="true">
@@ -516,7 +525,7 @@ As expected, smokers represent more than half of the population with high systol
 </p>
 </section><section id="high-pressure-and-weight" class="slide level2">
 <h2>High Pressure and Weight</h2>
-<div class="p_iframe">
+<div class="p_iframe4">
 <iframe frameborder="0" seamless="seamless" scrolling="no" src="fig2.html">
 </iframe>
 </div>
@@ -529,18 +538,24 @@ We have seen the percentage of people with high systolic pressure that represent
 </p>
 <p class="fragment fade-in">
 This would be more interesting to try to detect possible higher risks between classes.
-</p></section><section id="jjj" class="slide level2">
-<h2>jjj</h2>
-<div class="p_iframe2">
+</p></section><section id="high-pressure-and-smoking-ii" class="slide level2">
+<h2>High Pressure and Smoking II</h2>
+<div class="p_iframe">
 <iframe frameborder="0" seamless="seamless" scrolling="no" src="fig4.html">
 </iframe>
 </div>
-</section><section id="ki" class="slide level2">
-<h2>ki</h2>
+<p class="fragment fade-in">
+As expected, smoking implies a higher risk of high systolic pressure.
+</p>
+</section><section id="high-pressure-and-weight-ii" class="slide level2">
+<h2>High Pressure and Weight II</h2>
 <div class="p_iframe2">
 <iframe frameborder="0" seamless="seamless" scrolling="no" src="fig3.html">
 </iframe>
 </div>
+<p class="fragment fade-in">
+Being obese is associated with higher risk of high systolic pressure.
+</p>
 </section></section>
     </div>
   </div>

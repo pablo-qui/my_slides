@@ -3,11 +3,12 @@ title: "Blood Dataset <p style='text-transform: none;'><small>Pablo Quicios Asen
 
 output:
   revealjs::revealjs_presentation:
-    theme: sky
+    theme: white
     highlight: pygments
     center: true
     increment: true
-    self_contained: false   
+    self_contained: false 
+    
 ---
 
 
@@ -16,14 +17,20 @@ output:
   .p_iframe iframe {
     width:70%;
     height:476px;
-    
+    margin-right:0cm
 }
-.p_iframe2 iframe {
-    width:80%;
+
+   .p_iframe4 iframe {
+    width:70%;
     height:476px;
-    
-}
-  
+    margin-right:0cm
+} 
+
+   .p_iframe2 iframe {
+    width:70%;
+    height:476px;
+    margin-right:0cm
+} 
   
 </style>
 ```{r,include=F}
@@ -40,9 +47,9 @@ Blood1$Overwt <- as.factor(Blood1$Overwt)
 This dataset contains information of the systolic blood pressure, weight and smoking status for a sample of 500 adults. The variables are explained now.
 <br>
 
-<li class='fragment fade-in'> SystolicBP: systolic blood pressure (mm of Hg),</li>
-<li class='fragment fade-in'> Smoke: 1=smoker or 0=non-smoker,
-<li class='fragment fade-in'> Overwt: 1=normal, 2=overweight or 3=obese.</li>
+<li class='fragment fade-right'> SystolicBP: systolic blood pressure (mm of Hg),</li>
+<li class='fragment fade-right'> Smoke: 1=smoker or 0=non-smoker,
+<li class='fragment fade-right'> Overwt: 1=normal, 2=overweight or 3=obese.</li>
 <br>
 <p class='fragment fade-in'>
 
@@ -51,7 +58,8 @@ The aim of the study is to determine the correlation of the two latter variables
 
 
 # Densities in different populations  {incremental=true}
-We ask ourselves if the systolic pressure is signifacntly different between smokers and non-smokers and among weight classes. 
+<p class='fragment fade-in'>
+We ask ourselves if the systolic pressure is signicantly different between smokers and non-smokers and among weight classes. </p>
 <br>
 <p class='fragment fade-in'>
 We will plot the density of the systolic pressure regarding each population.
@@ -119,7 +127,7 @@ fig2 <- plot_ly(risk_weight, labels = ~Weight, values = ~Number, type = 'pie')
 htmlwidgets::saveWidget(fig2,'fig2.html')
 ```
 
-<div class="p_iframe">
+<div class="p_iframe4">
 <iframe frameborder="0" seamless='seamless' scrolling=no src="fig2.html"></iframe>
 </div>
 <p class='fragment fade-in'> We see how obese people represent almost half of the population with high systolic pressure</p> 
@@ -129,7 +137,7 @@ We have seen the percentage of people with high systolic pressure that represent
 
 <p class='fragment fade-in'> This would be more interesting to try to detect possible higher risks between classes. </p>
 
-## jjj
+## High Pressure and Smoking II
 ```{r,echo=F}
 smoker <- Blood1[Blood1$Smoke==1,]
 nsmoker <- Blood1[Blood1$Smoke==0,]
@@ -138,22 +146,23 @@ nsmoker <- Blood1[Blood1$Smoke==0,]
 per_high_nsmo <- sum(nsmoker$SystolicBP>140)/nrow(nsmoker)
 per_high_smo <- sum(smoker$SystolicBP>140)/nrow(smoker)
 
-smo <- c("Non Smoker","Smoker")
+Smoking <- c("Non Smoker","Smoker")
 
 Percentage_high_pressure <- c(per_high_nsmo,per_high_smo)
 Percentage_normal <- c(1-c(per_high_nsmo,per_high_smo))
-per_weight <- data.frame(smo, Percentage_high_pressure)
+per_weight <- data.frame(Smoking, Percentage_high_pressure)
 
-fig4 <- plot_ly(per_weight, x = ~smo, y = ~Percentage_high_pressure, type = 'bar', name = 'SF Zoo')
-fig4 <- fig4 %>% add_trace(y = ~Percentage_normal, name = 'LA Zoo')
+fig4 <- plot_ly(per_weight, x = ~Smoking, y = ~Percentage_high_pressure, type = 'bar', name = 'High pres.')
+fig4 <- fig4 %>% add_trace(y = ~Percentage_normal, name = 'Normal pres.',marker = list(color ='rgb(58,200,225)'))
 fig4 <- fig4 %>% layout(yaxis = list(title = 'Count'), barmode = 'stack')
 htmlwidgets::saveWidget(fig4,'fig4.html')
 
 ```
-<div class="p_iframe2">
+<div class="p_iframe">
 <iframe frameborder="0" seamless='seamless' scrolling=no src="fig4.html"></iframe>
 </div>
-## ki
+<p class='fragment fade-in'> As expected, smoking implies a higher risk of high systolic pressure. </p>
+## High Pressure and Weight II
 
 ```{r,echo=F}
 normal <- Blood1[Blood1$Overwt==0,]
@@ -169,8 +178,8 @@ Percentage_high_pressure <- c(per_high_normal,per_high_overwt,per_high_obese)
 Percentage_normal <- c(1-c(per_high_normal,per_high_overwt,per_high_obese))
 per_weight <- data.frame(Weights, Percentage_high_pressure)
 
-fig3 <- plot_ly(per_weight, x = ~Weights, y = ~Percentage_high_pressure, type = 'bar', name = 'SF Zoo')
-fig3 <- fig3 %>% add_trace(y = ~Percentage_normal, name = 'LA Zoo')
+fig3 <- plot_ly(per_weight, x = ~Weights, y = ~Percentage_high_pressure, type = 'bar', name = 'High pres.')
+fig3 <- fig3 %>% add_trace(y = ~Percentage_normal, name = 'Normal pres.',marker = list(color ='rgb(58,200,225)'))
 fig3 <- fig3 %>% layout(yaxis = list(title = 'Count'), barmode = 'stack')
 htmlwidgets::saveWidget(fig3,'fig3.html')
 
@@ -179,5 +188,5 @@ htmlwidgets::saveWidget(fig3,'fig3.html')
 <iframe frameborder="0" seamless='seamless' scrolling=no src="fig3.html"></iframe>
 </div>
 
-
+<p class='fragment fade-in'>Being obese is associated with higher risk of high systolic pressure. </p>
 
